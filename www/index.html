@@ -30,6 +30,23 @@
         $("#message").html("Failed to create new object, with error code: " + JSON.stringify(err));
       })
     }
+
+    function fetch() {
+      // 登録するレコードを用意
+      var testClass = new TestClass();
+      var key = "text";
+      var value = $("#value").val();
+      // レコードのフィールドと値を設定
+      testClass.set(key, value);
+      // レコードをデータベースに登録
+      testClass.save()
+      .then(function(m) {
+        $("#message").html("New object created with objectId: " + testClass.objectId);
+      })
+      .catch(function(err){
+        $("#message").html("Failed to create new object, with error code: " + JSON.stringify(err));
+      })
+    }
     </script>
 </head>
 <body>
@@ -40,6 +57,7 @@
   </div>
   <div id="button">
     <button id="btnA" class="btn" onclick="register()">Register</button>
+    <button id="btnB" class="btn" onclick="fetch()">Fetch</button>
   </div>
   <div id="message">message area</div>
 </body>
