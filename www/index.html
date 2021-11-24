@@ -44,16 +44,20 @@
 
       function fetchAll() {
       var TestClass = ncmb.DataStore("FetchTest");
-      var msg = ""; 
+      var msg = "";
       TestClass.fetchAll() 
       .then(function(results){ 
         for (let i=0;i<results.length;i++){
           var data=results[i].get("text");
           var update=results[i].get("updateDate");
-          msg += "Data: "+data+"<br>Update Time: "+update+"<br>";
-          $("#message").html(msg);
-        }
-        
+          msg = "<tr><td>"+data+"<th>"+update+"</th></td></tr>"
+          //$("#message").html(data);
+          //$("#updateTime").html(update);
+          var table = document.getElementById("myTable");
+          tableBody = $("table tbody");
+          tableBody.append(msg);
+          //tableBody.append(update);
+        }        
       })
     }
     </script>
@@ -69,6 +73,9 @@
     <button id="btnB" class="btn" onclick="fetch()">Fetch</button>
     <button id="btnC" class="btn" onclick="fetchAll()">Fetch All</button>
   </div>
-  <div id="message">message area</div>
+  
+<table id="myTable">
+  <tr><th>message</th><th>Update Date</th></tr>
+</table>
 </body>
 </html>
